@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class BookService {
-//Проклятый Класс 9999
+//Проклятый
     @Autowired
     private BookRepository bookRepository;
 
