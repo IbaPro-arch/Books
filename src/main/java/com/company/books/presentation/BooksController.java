@@ -1,9 +1,12 @@
 package com.company.books.presentation;
 
+
+import com.company.books.dto.Request.BookLocationDTO;
+import com.company.books.dto.Response.BookDTOResponse;
 import com.company.books.entity.Book;
 import com.company.books.Service.BookService;
-import com.company.books.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,21 +19,18 @@ import java.util.List;
     @Autowired
     private BookService bookservice;
 
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-
     @GetMapping("/books")
     public List<Book> getAllBooks() {
         return bookservice.getAllBooks();
     }
 
     @GetMapping(path = "/books/{bookId}")
-    public Book getBook(Integer bookId) {
-        return bookservice.getBook(bookId);
+    public BookDTOResponse getBook(Integer bookId) {
+        return new BookDTOResponse(bookservice.getBook(bookId));
     }
 
     @PostMapping(path = "/books")
-    public void addBook(@RequestBody Book books) {
+    public void addBook(@RequestBody BookLocationDTO books) {
         bookservice.addBook(books);
     }
 
