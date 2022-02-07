@@ -1,5 +1,6 @@
 package com.company.books.Service;
 
+import com.company.books.dto.Request.BookLocationDTO;
 import com.company.books.entity.Book;
 import com.company.books.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,12 @@ public class BookService {
         return (Book) bookRepository.findById(id).orElseGet(Book::new);
     }
 
-    public void addBook(Book whiskey) {
-        bookRepository.save(whiskey);
+    public void addBook(BookLocationDTO bookLocationDTO) {
+        bookRepository.save(bookLocationDTO.build());
     }
 
-    public void updateBook(String id, Book whiskey) {
-        bookRepository.save(whiskey);
+    public void updateBook(String id, Book books) {
+        bookRepository.save(books);
     }
 
     public Integer deleteBook(Integer id) {
